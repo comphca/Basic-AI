@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 from keras.utils import np_utils
 
 
-path='/home/comphca/anaconda3/envs/tensorflow/mnist.npz'
+#path='/home/comphca/anaconda3/envs/tensorflow/mnist.npz'
+path = '../mnist.npz'
 f = np.load(path)
 x_Train, y_Train = f['x_train'], f['y_train']
 x_Test, y_Test = f['x_test'], f['y_test']
