@@ -14,18 +14,20 @@ x_Test, y_Test = f['x_test'], f['y_test']
 x_Train4D = x_Train.reshape(x_Train.shape[0],28,28,1).astype('float32')
 x_Test4D = x_Test.reshape(x_Test.shape[0],28,28,1).astype('float32')
 
-#imageÍ¼Ïñ±ê×¼»¯£¬³ıÒÔ255
+#imageå›¾åƒæ ‡å‡†åŒ–ï¼Œé™¤ä»¥255
 x_Train4D_normalize = x_Train4D / 255
 x_Test4D_normalize = x_Test4D / 255
 
-#label´¦Àí£¬ÒÔOne-Hot Encoding±àÂë´¦Àí    0000000100Ôò±íÊ¾Êı×Ö7
+#labelå¤„ç†ï¼Œä»¥One-Hot Encodingç¼–ç å¤„ç†    0000000100åˆ™è¡¨ç¤ºæ•°å­—7
 y_TrainOneHot = np_utils.to_categorical(y_Train)
 y_testOneHot = np_utils.to_categorical(y_Test)
 
 
-#½¨Á¢Ò»¸öSequentialÄ£ĞÍ£¬ºóĞøÊ¹ÓÃmodel.add()Ôö¼ÓÍøÂç²ã
+#å»ºç«‹ä¸€ä¸ªSequentialæ¨¡å‹ï¼Œåç»­ä½¿ç”¨model.add()å¢åŠ ç½‘ç»œå±‚
 model = Sequential()
 
+
+#
 model.add(Conv2D(filters=16,
                  kernel_size=(5,5),
                  padding='same',
