@@ -5,6 +5,10 @@ import matplotlib.pyplot as plt
 from keras.utils import np_utils
 
 
+from util import show_train_history
+from util import plot_image_labels_prediction
+
+
 #path='/home/comphca/anaconda3/envs/tensorflow/mnist.npz'
 path = '../mnist.npz'
 f = np.load(path)
@@ -67,3 +71,18 @@ model.compile(loss='categorical_crossentropy',
 train_history = model.fit(x = x_Train4D_normalize,
                           y = y_TrainOneHot,validation_split=0.2,
                           epochs=10,batch_size=300,verbose=2)
+
+
+scores = model.evaluate(x_Test4D_normalize,y_testOneHot)
+scores[1]
+
+show_train_history.show_train_history(train_history,'acc','val_acc')
+
+
+prediction = model.predict_classes(x_Test4D_normalize)
+
+prediction[:10]
+
+
+
+#plot_image_labels_prediction(x_Test,y_Test,prediction,idx=0)
