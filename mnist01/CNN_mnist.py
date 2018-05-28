@@ -73,7 +73,7 @@ model.add(Dense(128,activation='relu'))
 
 model.add(Dropout(0.5))
 
-建立输出层，共有10个神经元，对应0-9数字，使用softmax激活函数进行转换，softmax可以将神经元的输出转换为预测每一个数字的概率
+#建立输出层，共有10个神经元，对应0-9数字，使用softmax激活函数进行转换，softmax可以将神经元的输出转换为预测每一个数字的概率
 model.add(Dense(10,activation='softmax'))
 
 #查看模型摘要
