@@ -17,9 +17,13 @@ f = np.load(path)
 x_Train, y_Train = f['x_train'], f['y_train']
 x_Test, y_Test = f['x_test'], f['y_test']
 
-#将图像特征值以reshape转换为6000*28*28*1的4维矩阵
+#将图像特征值以reshape转换为60000*28*28*1的4维矩阵
+#对比多层感知器，因为卷积网络要保证图像的维数，所以reshape转换为（个数×28×28×1）宽高和单色图像
 x_Train4D = x_Train.reshape(x_Train.shape[0],28,28,1).astype('float32')
 x_Test4D = x_Test.reshape(x_Test.shape[0],28,28,1).astype('float32')
+#print(x_Train.shape[0])
+#print(x_Test.shape[0])
+#print(x_Train4D[0])
 
 #image图像标准化，除以255
 x_Train4D_normalize = x_Train4D / 255
@@ -111,4 +115,4 @@ prediction[:10]
 
 
 
-#plot_image_labels_prediction(x_Test,y_Test,prediction,idx=0)
+plot_image_labels_prediction(x_Test,y_Test,prediction,idx=0)
