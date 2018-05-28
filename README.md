@@ -1,4 +1,4 @@
-# mnist
+﻿# Base
 ubuntu 16.*
 
 环境：tensorflow 1.0.1 + keras 2.0.2 + python 3.6
