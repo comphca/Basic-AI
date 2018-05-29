@@ -14,7 +14,7 @@ print('x_train:',len(x_train))
 print('x_test:',len(x_test))
 
 #(50000, 32, 32, 3)
-#(50000, 1)  50000项数据，每个是0-9的表示，每个数字代表一个类别
+#(50000, 1)  50000项数据，50000*1的矩阵，每个一维向量表示一种类别
 #图像shape形状，第一维是项数，二三维是图像大小32*32，第四维是RGB三原色所以是3
 print(x_train.shape)
 print(y_train.shape)
