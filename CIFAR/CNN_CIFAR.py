@@ -62,6 +62,12 @@ model.add(Dense(10,activation='softmax'))
 #print(model.summary())
 
 
+try:
+    model.load_weights("cifarCnnModel.h5")
+    print("loss")
+except:
+    print("success")
+
 #train
 model.compile(loss='categorical_crossentropy',
               optimizer='adam',metrics=['accuracy'])
@@ -71,5 +77,16 @@ model.compile(loss='categorical_crossentropy',
 #epochs=10  执行10个训练周期  40000/128 = 312  所以每个训练周期大概分为312次训练
 #batch_size=128   1/10 --> 128/40000   256/40000  384/40000
 train_history = model.fit(x_train_normalize,y_train_OneHot,
-                          validation_split=0.2,
-                          epochs=10,batch_size=128,verbose=1)
+                          validation_split=0.7,
+                          epochs=1,batch_size=128,verbose=1)
+
+
+#
+#scores = model.evaluate(x_test_normalize,y_test_OneHot,verbose=0)
+#print(scores[0])
+
+
+
+
+model.save_weights("cifarCnnModel.h5")
+print("Save model to disk")
