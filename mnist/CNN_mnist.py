@@ -1,12 +1,9 @@
 ﻿from keras.models import Sequential
 from keras.layers import Dense,Dropout,Flatten,Conv2D,MaxPooling2D
 import numpy as np
-import matplotlib.pyplot as plt
 from keras.utils import np_utils
 
-
-from util import show_train_history
-from util import plot_image_labels_prediction
+from util.mnist import plot_image_labels_prediction, show_train_history
 
 '''
 	数据预处理
@@ -102,7 +99,7 @@ train_history = model.fit(x = x_Train4D_normalize,
                           epochs=20,batch_size=300,verbose=2)
 
 
-show_train_history.show_train_history(train_history,'acc','val_acc')
+show_train_history.show_train_history(train_history, 'acc', 'val_acc')
 
 scores = model.evaluate(x_Test4D_normalize,y_testOneHot)
 scores[1]
@@ -115,4 +112,4 @@ prediction[:10]
 
 
 
-plot_image_labels_prediction(x_Test,y_Test,prediction,idx=0)
+plot_image_labels_prediction(x_Test, y_Test, prediction, idx=0)
