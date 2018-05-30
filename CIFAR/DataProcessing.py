@@ -22,6 +22,6 @@ print(y_train.shape)
 #表示第一个图像，是32*32*3的矩阵表示
 #print(x_train[0])
 
-#建数据字典，定义每个数字代表的图像类别名称
+#建数据字典，定义每个数字代表的图像类别名称，方便分类
 label_dict = {0:"airplan",1:"automobile",2:"bird",3:"cat",4:"deer",
               5:"dog",6:"frog",7:"horse",8:"ship",9:"truck"}
