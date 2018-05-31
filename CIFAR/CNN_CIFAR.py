@@ -5,6 +5,8 @@ from keras.layers import Dense,Dropout,Activation,Flatten
 from keras.layers import Conv2D,MaxPooling2D,ZeroPadding2D
 from keras.utils import np_utils
 
+from util.CIFAR.plot_image_label_prediction import plot_image_labels_prediction
+
 
 #加载数据
 (x_train,y_train),(x_test,y_test) = cifar10.load_data()
@@ -49,13 +51,24 @@ model.add(Dropout(rate=0.25))
 #缩减每幅图为8*8大小
 model.add(MaxPooling2D(pool_size=(2,2)))
 
+
+#
+model.add(Conv2D(filters=128,kernel_size=(3,3),
+                 activation='relu',
+                 padding='same'))
+model.add(Dropout(rate=0.3))
+model.add(MaxPooling2D(pool_size=(2,2)))
+
+
 #建立平坦层，共有64个8*8的图像转换为一维向量，长度是64*8*8=4096，4096个float数，对应4096个神经单元
 model.add(Flatten())
 model.add(Dropout(rate=0.25))
 
 #建立隐藏层，共1024个单元
-model.add(Dense(1024,activation='relu'))
+model.add(Dense(2500,activation='relu'))
 model.add(Dropout(rate=0.25))
+model.add(Dense(1500,activation='relu'))
+model.add(Dropout(rate=0.3))
 
 #建立输出层，10个神经单元，使用softmax激活函数进行转换，softmax可以将神经元的输出转换为预测每一个图像类别的概率
 model.add(Dense(10,activation='softmax'))
@@ -64,9 +77,9 @@ model.add(Dense(10,activation='softmax'))
 
 try:
     model.load_weights("cifarCnnModel.h5")
-    print("loss")
-except:
-    print("success")
+    print("加载模型成功!继续训练模型")
+except :
+    print("加载模型失败!开始训练一个新模型")
 
 #train
 model.compile(loss='categorical_crossentropy',
@@ -76,9 +89,9 @@ model.compile(loss='categorical_crossentropy',
 #validation_split=0.2  将train数据分为80%作为训练数据，20%作为验证数据 50000*80% = 40000
 #epochs=10  执行10个训练周期  40000/128 = 312  所以每个训练周期大概分为312次训练
 #batch_size=128   1/10 --> 128/40000   256/40000  384/40000
-train_history = model.fit(x_train_normalize,y_train_OneHot,
-                          validation_split=0.7,
-                          epochs=1,batch_size=128,verbose=1)
+#train_history = model.fit(x_train_normalize,y_train_OneHot,
+                          #validation_split=0.2,
+                          #epochs=10,batch_size=128,verbose=1)
 
 
 #
@@ -88,5 +101,10 @@ train_history = model.fit(x_train_normalize,y_train_OneHot,
 
 
 
-model.save_weights("cifarCnnModel.h5")
-print("Save model to disk")
+#model.save_weights("cifarCnnModel.h5")
+#print("Save model to disk")
+
+prediction = model.predict_classes(x_test_normalize)
+print(prediction[:5])
+
+plot_image_labels_prediction(x_test,y_test,prediction,0,10)
