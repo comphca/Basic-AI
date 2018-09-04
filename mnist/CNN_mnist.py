@@ -18,6 +18,8 @@ x_Test, y_Test = f['x_test'], f['y_test']
 #对比多层感知器，因为卷积网络要保证图像的维数，所以reshape转换为（个数×28×28×1）宽高和单色图像
 x_Train4D = x_Train.reshape(x_Train.shape[0],28,28,1).astype('float32')
 x_Test4D = x_Test.reshape(x_Test.shape[0],28,28,1).astype('float32')
+print(x_Train.shape[0])
+print(x_Train.shape)
 #print(x_Train.shape[0])
 #print(x_Test.shape[0])
 #print(x_Train4D[0])
